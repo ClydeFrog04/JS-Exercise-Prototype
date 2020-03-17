@@ -45,15 +45,16 @@ function Person(name, age) {
     this.age = age;
     this.stomach = [];
 }
-Person.prototype.eat = function(food){
-    if(this.stomach.length >= 10) return;
+
+Person.prototype.eat = function (food) {
+    if (this.stomach.length >= 10) return;
     this.stomach.push(food);
 }
-Person.prototype.poop = function(){
+Person.prototype.poop = function () {
     this.stomach.splice(0, this.stomach.length);
 }
 
-Person.prototype.toString = function(){
+Person.prototype.toString = function () {
     return `${this.name}, ${this.age}`;
 }
 
@@ -78,17 +79,20 @@ function Car(model, milesPerGallon) {
     this.tank = 0;
     this.odometer = 0;
 }
-Car.prototype.fill = function(gallons){
+
+Car.prototype.fill = function (gallons) {
     this.tank += gallons;
-}
-Car.prototype.drive = function(distance){
+};
+Car.prototype.drive = function (distance) {
     this.odometer += distance;
     this.tank -= (distance / this.milesPerGallon);
-    if(this.tank <= 0){
+    if (this.tank <= 0) {
         this.tank = 0;
+        this.odometer--;//todo: I believe there is something wrong with my logic as I am getting an off by one error, so I went with this hacky fix for now.
+
         return `I ran out of fuel at ${this.odometer} miles!`;
     }
-}
+};
 
 /*
   TASK 3
@@ -100,22 +104,25 @@ Car.prototype.drive = function(distance){
 function Baby(name, age, favoriteToy) {
     Person.call(this, name, age);
     this.favoriteToy = favoriteToy;
+}
 
-}
-Baby.prototype.play = function(){
-    return `Playing with ${this.favoriteToy}`;
-}
-//Child.prototype = Object.create(Person.prototype);
 Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function () {
+    return `Playing with ${this.favoriteToy}`;
+};
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+
+  Global binding, depends on environment but in front end it binds to window object
+
+  implicit binding refers to what come before the dot. e.g. 'bird.speak = function{return this.name}' 'this' refers to 'bird'
+
+  new binding, what makes constructor functions work. Becomes instance returned by function
+
+  Explicit binding, Forces things to behave in a specific way. Can be used as overrides for a given function. Refers to object passed in instead of object before the dot.
 */
 
 

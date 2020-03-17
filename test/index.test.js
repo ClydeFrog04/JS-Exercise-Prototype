@@ -131,26 +131,26 @@ describe('Instances of Car', () => {
 })
 
 describe('Instances of Baby', () => {
-  let baby
+  let baby;
   beforeEach(() => {
     baby = new Baby('Lucy', 5, 'trains')
-  })
+  });
   it('initialize with the given name', () => {
     expect(baby.name).to.equal('Lucy')
-  })
+  });
   it('initialize with the given age', () => {
     expect(baby.age).to.equal(5)
-  })
+  });
   it('initialize with the given favorite toy', () => {
     expect(baby.favoriteToy).to.equal('trains')
-  })
+  });
   it('get a play method from their prototype', () => {
     expect(baby.__proto__.play).to.be.not.undefined;
-  })
+  });
   it('can play with favorite toy', () => {
     expect(baby.play()).to.include('trains')
-  })
+  });
   it('inherit the methods on Person.prototype', () => {
     expect(Person.prototype).to.equal(baby.__proto__.__proto__)
-  })
-})
+  });
+});
